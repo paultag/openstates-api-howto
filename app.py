@@ -11,10 +11,9 @@ blacklist = []
 
 def do_math(what):
     what = sorted([(x, y) for x, y in what.items()], key=lambda x: x[1])
+    what.reverse()
     values = map(lambda x: x[1], what)
-    ret = sorted(zip(zscore(values), what), key=lambda x: x[0])
-    ret.reverse()
-    return ret
+    return zip(zscore(values), what)
 
 
 @app.route("/view/<who>")
