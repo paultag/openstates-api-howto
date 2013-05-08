@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Score</th>
+        <th>Interest</th>
+        <th>Raw Count</th>
+    </tr>
+{% for v in values %}
+    <tr>
+    {% with score, v = v %}
+        {% with what, count = v %}
+        <td>{{score}}</td>
+        <td>{{what}}</td>
+        <td>{{count}}</td>
+        {% endwith %}
+    {% endwith %}
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
