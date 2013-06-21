@@ -2,11 +2,12 @@
     global.query = function(who, data) {
         $.getJSON('/data/' + who, function(data) {
             var fill = d3.scale.category20();
+            var width = $(window).width(),
+                height = $(window).height();
 
-            d3.layout.cloud().size([300, 300])
+            d3.layout.cloud().size([width, height]) 
                 .words(data.map(function(d) {
-                    console.log(d)
-                    return {text: d[1][0], size: d[0] * 30};
+                    return {text: d[1][0], size: d[0] * 10};
                 }))
                 .padding(5)
                 .rotate(function() { return ~~(Math.random() * 2) * 90; })
@@ -17,10 +18,11 @@
 
             function draw(words) {
             d3.select("body").append("svg")
-                .attr("width", 300)
-                .attr("height", 300)
+                .attr("width", width)
+                .attr("height", height)
+                .attr("class", "mainel")
                 .append("g")
-                .attr("transform", "translate(150,150)")
+                .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
